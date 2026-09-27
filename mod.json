@@ -5,14 +5,42 @@
   },
   "id": "kwoto.hold_overlay",
   "name": "Hold Overlay",
-  "version": "v1.0.0",
+  "version": "v1.1.0",
   "developer": "Kwoto",
-  "description": "White scrolling hold bars with a click counter, inspired by KeyOverlay.",
+  "description": "Scrolling jump-hold bars with custom button images.",
+  "resources": {
+    "sprites": ["duck.png"]
+  },
   "settings": {
     "enabled": {
       "type": "bool",
       "name": "Enabled",
       "default": true
+    },
+    "show-image": {
+      "type": "bool",
+      "name": "Show button image",
+      "default": true
+    },
+    "button-image": {
+      "type": "file",
+      "name": "Custom button image",
+      "description": "Choose a PNG or JPG. Leave empty or reset to use the duck. Keep your chosen file in the same location. Square images fit best.",
+      "default": "",
+      "control": {
+        "dialog": "open",
+        "filters": [
+          {
+            "files": ["*.png", "*.jpg", "*.jpeg"],
+            "description": "Images (PNG, JPG)"
+          }
+        ]
+      }
+    },
+    "show-counter": {
+      "type": "bool",
+      "name": "Show counter on button",
+      "default": false
     },
     "show-p2": {
       "type": "bool",
