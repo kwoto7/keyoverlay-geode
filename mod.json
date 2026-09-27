@@ -1,0 +1,82 @@
+{
+  "geode": "5.0.0",
+  "gd": {
+    "win": "2.2081"
+  },
+  "id": "kwoto.hold_overlay",
+  "name": "Hold Overlay",
+  "version": "v1.0.0",
+  "developer": "Kwoto",
+  "description": "White scrolling hold bars with a click counter, inspired by KeyOverlay.",
+  "settings": {
+    "enabled": {
+      "type": "bool",
+      "name": "Enabled",
+      "default": true
+    },
+    "show-p2": {
+      "type": "bool",
+      "name": "Show player 2",
+      "default": false
+    },
+    "show-cps": {
+      "type": "bool",
+      "name": "Show CPS instead of total clicks",
+      "default": false
+    },
+    "fade": {
+      "type": "bool",
+      "name": "Fade bars at the top",
+      "default": true
+    },
+    "x": {
+      "type": "float",
+      "name": "Position X",
+      "default": 20,
+      "min": 0,
+      "max": 2000
+    },
+    "y": {
+      "type": "float",
+      "name": "Position Y",
+      "default": 20,
+      "min": 0,
+      "max": 1200
+    },
+    "width": {
+      "type": "float",
+      "name": "Key and bar width",
+      "default": 22,
+      "min": 8,
+      "max": 100
+    },
+    "height": {
+      "type": "float",
+      "name": "History height",
+      "default": 130,
+      "min": 30,
+      "max": 500
+    },
+    "speed": {
+      "type": "float",
+      "name": "Scroll speed",
+      "default": 150,
+      "min": 20,
+      "max": 600
+    },
+    "scale": {
+      "type": "float",
+      "name": "Overlay scale",
+      "default": 1,
+      "min": 0.25,
+      "max": 3
+    },
+    "opacity": {
+      "type": "float",
+      "name": "Opacity percent",
+      "default": 100,
+      "min": 5,
+      "max": 100
+    }
+  }
+}
