@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayLayer.hpp>
-#include <Geode/modify/GJBaseGameLayer.hpp>
+#include <Geode/modify/PlayerObject.hpp>
 #include <algorithm>
 #include "Timeline.hpp"
 using namespace geode::prelude;
@@ -106,11 +106,28 @@ class $modify(HoldPlayLayer, PlayLayer) {
         PlayLayer::pauseGame(unknown);
     }
 };
-class $modify(HoldInputLayer, GJBaseGameLayer) {
-    void handleButton(bool down, int button, bool player1) {
-        GJBaseGameLayer::handleButton(down,button,player1);
-        auto play=PlayLayer::get();
-        if (play && static_cast<GJBaseGameLayer*>(play)==this && button==1)
-            if (auto hud=overlay(play)) hud->input(down,player1);
+// Observe inputs where they reach the actual player, including replay inputs.
+// Do not also observe handleButton: one input may travel through both hooks.
+class $modify(HoldPlayerInputs, PlayerObject) {
+    void reportJump(bool down) {
+        auto play = PlayLayer::get();
+        if (!play) return;
+        bool player1 = this == play->m_player1;
+        if (!player1 && this != play->m_player2) return;
+        if (auto hud = overlay(play)) hud->input(down, player1);
+    }
+    bool pushButton(PlayerButton button) {
+        bool result = PlayerObject::pushButton(button);
+        if (static_cast<int>(button) == 1) reportJump(true);
+        return result;
+    }
+    bool releaseButton(PlayerButton button) {
+        bool result = PlayerObject::releaseButton(button);
+        if (static_cast<int>(button) == 1) reportJump(false);
+        return result;
+    }
+    void releaseAllButtons() {
+        PlayerObject::releaseAllButtons();
+        reportJump(false);
     }
 };
